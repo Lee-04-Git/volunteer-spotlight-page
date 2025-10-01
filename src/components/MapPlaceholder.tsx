@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { Plus, Minus, Navigation2, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import ProgramSelector from "./ProgramSelector";
 import VolunteerMapModal from "./VolunteerMapModal";
 import { DEFAULT_LOCATION } from "../data/MarkerData";
@@ -20,18 +22,18 @@ const MapPlaceholder = () => {
       (position) => {
         setUserLocation({
           lat: position.coords.latitude,
-          lng: position.coords.longitude
+          lng: position.coords.longitude,
         });
       },
       (error) => {
-        console.log('Geolocation error:', error);
+        console.log("Geolocation error:", error);
         // Default to Cape Town if geolocation fails
         setUserLocation(DEFAULT_LOCATION);
       },
       {
         enableHighAccuracy: true,
         timeout: 10000,
-        maximumAge: 300000
+        maximumAge: 300000,
       }
     );
   }, []);
