@@ -548,7 +548,7 @@ const ProgramMap = ({
       )}
 
       {/* Location Detail Modal */}
-      {(isDetailModalOpen && selectedLocation) && (
+      {isDetailModalOpen && selectedLocation && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[9999]"
           onClick={() => setIsDetailModalOpen(false)}
@@ -566,46 +566,81 @@ const ProgramMap = ({
                 <X className="h-6 w-6" />
               </button>
             </div>
-            
+
             <div className="space-y-4">
               <p className="text-gray-600">{selectedLocation.description}</p>
-              
+
               <div className="bg-gray-50 p-3 rounded">
                 <p className="text-sm font-medium">Address:</p>
                 <p className="text-sm">{selectedLocation.address}</p>
               </div>
-              
+
               {userLocation && (
                 <div className="bg-blue-50 p-3 rounded">
-                  <p className="text-sm font-medium text-blue-800">Distance from you:</p>
+                  <p className="text-sm font-medium text-blue-800">
+                    Distance from you:
+                  </p>
                   <p className="text-lg font-bold text-blue-900">
-                    {calculateDistance(userLocation.lat, userLocation.lng, selectedLocation.lat, selectedLocation.lng).km} km
+                    {
+                      calculateDistance(
+                        userLocation.lat,
+                        userLocation.lng,
+                        selectedLocation.lat,
+                        selectedLocation.lng
+                      ).km
+                    }{" "}
+                    km
                   </p>
                   <div className="text-sm text-blue-700 mt-1">
-                    <p>🚶 ~{calculateDistance(userLocation.lat, userLocation.lng, selectedLocation.lat, selectedLocation.lng).walkingTimeMinutes} min walk</p>
-                    <p>🚗 ~{calculateDistance(userLocation.lat, userLocation.lng, selectedLocation.lat, selectedLocation.lng).drivingTimeMinutes} min drive</p>
+                    <p>
+                      🚶 ~
+                      {
+                        calculateDistance(
+                          userLocation.lat,
+                          userLocation.lng,
+                          selectedLocation.lat,
+                          selectedLocation.lng
+                        ).walkingTimeMinutes
+                      }{" "}
+                      min walk
+                    </p>
+                    <p>
+                      🚗 ~
+                      {
+                        calculateDistance(
+                          userLocation.lat,
+                          userLocation.lng,
+                          selectedLocation.lat,
+                          selectedLocation.lng
+                        ).drivingTimeMinutes
+                      }{" "}
+                      min drive
+                    </p>
                   </div>
                 </div>
               )}
-              
+
               <div className="flex justify-between text-sm">
                 <div>
                   <p className="font-medium">Volunteers needed:</p>
-                  <p>{selectedLocation.volunteers_signed_up}/{selectedLocation.volunteers_needed}</p>
+                  <p>
+                    {selectedLocation.volunteers_signed_up}/
+                    {selectedLocation.volunteers_needed}
+                  </p>
                 </div>
                 <div>
                   <p className="font-medium">Hours:</p>
                   <p>{selectedLocation.hours_open}</p>
                 </div>
               </div>
-              
+
               <button
                 onClick={() => handleRegisterVolunteer(selectedLocation)}
                 className="w-full bg-blue-600 text-white py-3 px-4 rounded font-semibold hover:bg-blue-700 transition-colors"
               >
                 Apply to Volunteer
               </button>
-              
+
               <p className="text-xs text-gray-500 text-center">
                 Contact: {selectedLocation.contact}
               </p>
