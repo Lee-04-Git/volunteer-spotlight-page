@@ -33,17 +33,31 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(link.path)
-                    ? "bg-primary text-primary-foreground"
-                    : "text-foreground hover:bg-secondary"
-                }`}
-              >
-                {link.name}
-              </Link>
+              link.path === "/" ? (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive(link.path)
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-secondary"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <button
+                  key={link.path}
+                  onClick={(e) => e.preventDefault()}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive(link.path)
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-secondary cursor-pointer"
+                  }`}
+                >
+                  {link.name}
+                </button>
+              )
             ))}
           </div>
 
